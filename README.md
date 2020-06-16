@@ -1,9 +1,9 @@
 
-# Atalaia NLP for Machine Learning
+# Atalaia - Text Preprocessing NLP
 
-*  [La Madeleine](https://lamadeleineshop.com/)
+*  [Lima Vallantin](https://vallant.in/)
   
-Atalaia is a collection of methods that can be used for simple NLP tasks. It can be used for tasks involving text preprocessing for machine learning. Atalaia works mainly with text strings and lists of strings.  
+Atalaia is a collection of methods that can be used for simple Text Preprocessing tasks. It can be used for tasks involving text preprocessing for machine learning. Atalaia works mainly with text strings and lists of strings.  
 
 The library is developed in Python 3.
 
@@ -140,7 +140,7 @@ Use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
-*  **Wilame Vallantin** - *Initial work* - [La Madeleine](https://lamadeleineshop.com/)
+*  **Lima Vallantin** - *Initial work* - [Lima Vallantin](https://vallant.in/)
 
 ## License
 
