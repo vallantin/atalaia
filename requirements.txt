@@ -1,6 +1,5 @@
 nltk==3.4.5
 tqdm==4.19.5
-pdoc==0.3.2
 emoji==0.5.1
 numpy==1.16.1
 pandas==0.24.1

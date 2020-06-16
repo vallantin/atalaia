@@ -86,7 +86,6 @@ Use the single available methods to create a custom pipeline instead of using th
 
 	text = "At the end of the day, @john you're solely responsible for your #success and your #failure. And the sooner you realize that, you accept that, and integrate that into your work ethic, you will start being #successful."
 	text = atalaia_en.lower_remove_white(text)
-	text = atalaia_en.expand_contractions(text)
 	text = atalaia_en.replace_handles(text, 'HANDLE')
 	text = atalaia_en.replace_hashtags(text, 'HASHTAG')
 	text = atalaia_en.remove_stopwords(text)
@@ -110,11 +109,9 @@ Use the single available methods to create a custom pipeline instead of using th
 					
 		$ python3 setup.py install
 
-### Docs
+### Examples
 
-Navigate to atalaia/atalaia and type:
-
-	$ pdoc --html atalaia
+See the [Examples notebook](examples/atalaia_examples.ipynb) file for details.
 
 ### Release
 
@@ -127,8 +124,6 @@ Follow the steps below before releasing a new version:
 	python setup.py bdist_rpm
 
 3. Install the new version on a clean environment for testing
-
-4. If everything is ok, generate the doc using pdoc
 
 ## Contributing
 
