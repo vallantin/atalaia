@@ -12,8 +12,8 @@ import warnings
 from atalaia import strings
 from collections import Counter
 from nltk.stem.snowball import SnowballStemmer
-from atalaia.assets.stopwords import stopwords_pt_br
-from atalaia.assets.stopwords import stopwords_en
+from atalaia.assets.stopwords import stopwords_pt_br, stopwords_en
+from atalaia.assets.contractions import contractions_en, contractions_pt_br, contractions_fr
 from tqdm import tqdm
 from random import choice
 
@@ -37,6 +37,7 @@ class Atalaia:
             The tokenizer for tokenizing sentences 
         """ 
         self.stopwords = {}
+        self.contractions = contractions_en
         self.language = language
         self.lg_config = self.__lg_config()
         self.vocab = Counter()
@@ -45,11 +46,14 @@ class Atalaia:
         """ Converts the language inputed during Atalaia init to a format that can be used by NLTK"""
         if self.language == 'pt-br':
             self.stopwords.update(stopwords_pt_br)
+            self.contractions = contractions_pt_br
             return 'portuguese'
         if self.language == 'en':
             self.stopwords.update(stopwords_en)
+            self.contractions = contractions_en
             return 'english'
         if self.language == 'fr':
+            self.contractions = contractions_fr
             return 'french'
         if self.language == 'custom':
             return 'portuguese'
@@ -66,6 +70,15 @@ class Atalaia:
             The string that will be transformed
         """
         text = re.sub(r'<[^>]*>', '', text)
+        return text
+
+    def expand_contractions(self, text):
+        '''Expands contracted tokens. Doesn't ignore the case '''
+
+        # check the patterns
+        for pattern, replacement in self.contractions.items():
+            text = re.sub(pattern, replacement, text)
+
         return text
 
     def replace_html_tags(self, text:str, placeholder:str):
