@@ -573,6 +573,35 @@ class Atalaia:
         text = text.strip()
         return text
 
+    def replace_newline(self, text:str, replacement='. ', consider_punctuation=True):
+        """ Use it to replace newline \n
+        
+        >>> replace_newline("- Mary is coming! \n- When? \n- Today!")
+        '- mary is coming!  - when?  - today!'
+
+        Parameters
+        ----------
+        text : str
+            The string that will be transformed
+        replacement : str
+            The replacement to the newline char
+        consider_punctuation : bool
+            If True, sentences ending with ?.!,:;= will only be trimmed. Replacement won't be applied
+        """
+        if consider_punctuation:
+            if re.search(r'[?.!,:;=]\n', text):
+                # match all punct newline patterns and replace them by the punct only
+                text = re.sub(r'([?.!,:;=])\n', '\\1 ', text )
+                # then, do other replacements with newline
+                text = text.replace('\n', replacement )
+            else: 
+                text = text.replace('\n', replacement )
+        else:
+            # then, do other replacements with newline
+            text = text.replace('\n', replacement )
+
+        return text
+
     def lower_remove_white(self, text:str):
         """ Use it to lower text and to remove trailing whitespaces
         
@@ -592,11 +621,13 @@ class Atalaia:
 
         return text
 
-    def preprocess(self, text:str, tokenize=True, stem=True, remove_stopwords=False, replace_numbers=False, remove_numbers=False, remove_punct=True, strip_accs = True):
+    def preprocess(self, text:str, tokenize=True, stem=True, remove_stopwords=False, replace_numbers=False, remove_numbers=False, remove_punct=True, strip_accs = True, expand_contractions=False, replace_newline=False):
         """Preprocess text before data handling with most common settings.
         Text is processed in the following order:
 
             - lower text
+            - replace newline
+            - expand contractions
             - strip trailing whitespaces
             - convert emojis to text
             - replace urls
@@ -632,6 +663,12 @@ class Atalaia:
             Defines if numbers should be interpreted as strings (Eg.: 1 -> 'one')
         """
         text = str(text)
+        # should newlines be replaced? Standard config will be applied
+        if replace_newline == True:
+            text = self.replace_newline(text)
+        # expand contractions
+        if expand_contractions == True:
+            text = self.expand_contractions(text)
         # remove stopwords
         if remove_stopwords:
             text = self.remove_stopwords(text)
@@ -679,7 +716,7 @@ class Atalaia:
         # return text
         return text
             
-    def preprocess_list(self, text_list:list, tokenize=True, stem=True, remove_stopwords=False, replace_numbers=False, remove_numbers=False, remove_punct=True, strip_accs=True):
+    def preprocess_list(self, text_list:list, tokenize=True, stem=True, remove_stopwords=False, replace_numbers=False, remove_numbers=False, remove_punct=True, strip_accs=True, expand_contractions=False, replace_newline=False):
         """Preprocess every text in a list of strings
 
         >>> list_of_strings = [
@@ -705,9 +742,9 @@ class Atalaia:
             Defines if stopwords should be removed.
         """
         texts = []
-        for text in tqdm(text_list):
+        for text in text_list:
             # preprocess
-            text = self.preprocess(text, tokenize=tokenize, stem=stem, remove_stopwords=remove_stopwords, replace_numbers=replace_numbers, remove_numbers=remove_numbers, remove_punct=remove_punct, strip_accs = strip_accs)
+            text = self.preprocess(text, tokenize=tokenize, stem=stem, remove_stopwords=remove_stopwords, replace_numbers=replace_numbers, remove_numbers=remove_numbers, remove_punct=remove_punct, strip_accs = strip_accs, expand_contractions=expand_contractions)
             texts.append(text)
         return texts
 
@@ -878,7 +915,10 @@ class Atalaia:
         #keep words with '-' together
         #results= re.finditer(r'(\w+[\'-]\w+)|(\w+)(\s?[&]\s?)(\w+)|(?:[A-Z]\.)+|:(\w+):|http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|#(\w+)|@(\w+)|(\w+)|([°/\<\>\-.:*\[\],!?+"§$%&()])', text, re.MULTILINE)
         #don't keep words with '-' together
-        results = re.finditer(r'(\w+[\']\w+)|(\w+)(\s?[&]\s?)(\w+)|(?:[A-Z]\.)+|:(\w+):|http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|#(\w+)|@(\w+)|(\w+)|([°/\<\>\-.:*\[\],!?+"§$%&()])', text, re.MULTILINE)
+        #results = re.finditer(r'(\w+[\']\w+)|(\w+)(\s?[&]\s?)(\w+)|(?:[A-Z]\.)+|:(\w+):|http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|#(\w+)|@(\w+)|(\w+)|([°/\<\>\-.:*\[\],!?+"§$%&()])', text, re.MULTILINE)
+        #don't keep &
+        results = re.finditer(r'(\w+[\']\w+)|(?:[A-Z]\.)+|:(\w+):|http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|#(\w+)|@(\w+)|(\w+)|([°/\<\>\-.:*\[\],!?+"§$%&()])', text, re.MULTILINE)
+
 
         # get individual tokens and get emojis back
         tokens = [emoji.emojize(text[r.start():r.end()]) for r in results]

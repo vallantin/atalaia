@@ -141,8 +141,8 @@ Use [SemVer](http://semver.org/) for versioning.
 
 This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
 
-# V 0.1.0
+# V 0.2.0
 ##  New features
-- Expand current contractions on FR, PT-BR and EN
+- Use replace_newline to replace newline char by another char
 # Improvements
-- 
+- Preprocess functions now support replace_newline parameter
