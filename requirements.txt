@@ -1,8 +1,8 @@
-nltk==3.4.5
-tqdm==4.19.5
-emoji==0.5.1
-numpy==1.16.1
-pandas==0.24.1
-matplotlib==3.0.2
-scikit-learn==0.20.2
-gensim==3.8.1
+nltk
+tqdm
+emoji
+numpy
+pandas
+matplotlib
+scikit-learn
+gensim
