@@ -8,7 +8,6 @@ import random
 import re
 import time
 import unicodedata
-import warnings
 from atalaia import strings
 from collections import Counter
 from nltk.stem.snowball import SnowballStemmer
@@ -16,6 +15,10 @@ from atalaia.assets.stopwords import stopwords_pt_br, stopwords_en
 from atalaia.assets.contractions import contractions_en, contractions_pt_br, contractions_fr
 from tqdm import tqdm
 from random import choice
+from collections import Counter
+import requests
+import json
+
 
 class Atalaia:
     """Atalaia is a collection of methods that can be used for simple NLP tasks.
@@ -970,5 +973,69 @@ class Atalaia:
 
         return hapaxes
                 
+    def get_average_sentence_length(self, sentences:list, mode='mean'):
+
+        '''Calculates the average size of a sentence in a list of sentences. Use mode
+        to decide if you want the mean or the median'''
+
+        sizes = [len(self.tokenize(s)) for s in sentences]
+
+        if mode == 'mean':
+            return sum(sizes) / len(sizes) 
+        if mode == 'median':
+            n = len(sizes) 
+            sizes.sort() 
+            
+            if n % 2 == 0: 
+                median1 = sizes[n//2] 
+                median2 = sizes[n//2 - 1] 
+                median = (median1 + median2)/2
+            else: 
+                median = sizes[n//2] 
+            
+            return median
+
+    def representative_tokens(self, percentage:float, corpus:str, reverse=False):
+
+        '''Given a corpus and a percentage, get the tokens responsible for this percentage on the corpus'''
+
+        #tokenize corpus
+        tokens = self.tokenize(corpus)
+        
+        # count them
+        tokens_counter = dict(Counter(tokens))
+
+        # get the percentage of each token in corpus
+        total_tokens   = len(tokens)
+        tokens_counter = {k: v/total_tokens for k, v in tokens_counter.items()}
+
+        if reverse == False:
+            # sort so highest tokens come first
+            tokens_counter = {k: v for k, v in sorted(tokens_counter.items(), reverse=True, key=lambda item: item[1])}
+        elif reverse == True:
+            # sort so lowest tokens come first
+            tokens_counter = {k: v for k, v in sorted(tokens_counter.items(), key=lambda item: item[1])}
+
+        # iterate until the sum corresponds to the given percentage
+        main_tokens = {}
+        count       = 0
+        for k, v in tokens_counter.items():
+            if count <= percentage:
+                main_tokens[k] = v       
+                count += v
+
+        return main_tokens
 
 
+    def from_json(self, url:str, payload={}, dump=False):
+
+        '''Fetches a json response given an url and a dict of params'''
+
+        # Fetch data from a REST API
+        r = requests.get(url, params=payload)
+        res = r.json()
+
+        if dump == False:
+            return res
+        elif dump == True:
+            return json.dumps(res, indent=4)

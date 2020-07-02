@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="Atalaia",
-    version="0.2.0",
+    version="0.3.0",
     author="Lima Vallantin",
     author_email="lima@vallant.in",
     description="Atalaia is a collection of methods that can be used for simple NLP tasks and for machine learning text preprocessing.",

@@ -141,8 +141,9 @@ Use [SemVer](http://semver.org/) for versioning.
 
 This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
 
-# V 0.2.0
+# V 0.3.0
 ##  New features
-- Use replace_newline to replace newline char by another char
+- get_average_sentence_length: use it to calculate the average size of a sentence in a list of sentences. Use 'mode' to decide if you want the mean or the median
+- representative_tokens: given a corpus and a percentage, get the tokens responsible for this percentage on the corpus
+- from_json: Fetches a json response given an url and a dict of params
 # Improvements
-- Preprocess functions now support replace_newline parameter
