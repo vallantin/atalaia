@@ -217,5 +217,24 @@ stopwords_pt_br = {
               '([^0-9a-zÀ-ÿ]|^|\s+)(vc)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
 }
 
-stopwords_en = {'([^0-9a-zÀ-ÿ]|^|\s+)(the|an?|and|with|to)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+stopwords_en = {
+    '([^0-9a-zÀ-ÿ]|^|\s+)(the|an?|and|with|but|to|of|on|for|int?o?)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(me?y?)(self)?([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\4',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(we)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(ours?)(self|selves)?([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\4',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(your?)(self|selves)?([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\4',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(s?he)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(hers?)(self)?([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\4',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(his?m?)(self)?([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\4',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(its?)(self)?([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\4',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(them?y?)(self|selves)?([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\4',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(theirs?)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(what|which|who|when|this|that|these|those)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(am|is|are|was|were|be|been|being|have|has|had|having)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(do|does|did|doing)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(if|or|because|as|until|while|at|by|about|against|between)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(through|during|before|after|above|below|at|by|about|against|between)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(from|up|down|out|off|over|under|again|further|then|once)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(t?w?here|why|how|all|any|both|each|few|more|most|other)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(some|such|nor|only|own|same|so|than|too|very|s|t|can|will|just|don|should|would|could|now)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
 }

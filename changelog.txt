@@ -1,3 +1,7 @@
+# V 0.3.1
+#  Improvements
+- added new stop words to en.
+
 # V 0.3.0
 ##  New features
 - get_average_sentence_length: use it to calculate the average size of a sentence in a list of sentences. Use 'mode' to decide if you want the mean or the median
