@@ -144,3 +144,4 @@ This project is licensed under the Apache License - see the [LICENSE.md](LICENSE
 # V 0.3.4
 #  Improvements
 - Modified the way as the create_corpus method works.
+- Check if is list in hapaxes

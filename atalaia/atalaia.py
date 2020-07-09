@@ -957,7 +957,11 @@ class Atalaia:
     def hapaxes(self, corpus):
         '''Looks for tokens that ocurred only once in the whole corpus'''
         cnt = Counter()
-        corpus = ' '.join(corpus)
+
+        # check if corpus is list
+        if isinstance(corpus, list):
+            corpus = ' '.join(corpus)
+
         # tokenize the corpus
         for token in tqdm(self.tokenize(corpus)):
             cnt[token] += 1
