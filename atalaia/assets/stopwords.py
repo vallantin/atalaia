@@ -236,5 +236,5 @@ stopwords_en = {
     '([^0-9a-zÀ-ÿ]|^|\s+)(through|during|before|after|above|below|at|by|about|against|between)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
     '([^0-9a-zÀ-ÿ]|^|\s+)(from|up|down|out|off|over|under|again|further|then|once)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
     '([^0-9a-zÀ-ÿ]|^|\s+)(t?w?here|why|how|all|any|both|each|few|more|most|other)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
-    '([^0-9a-zÀ-ÿ]|^|\s+)(some|such|nor|only|own|same|so|than|too|very|s|t|can|will|just|don|should|would|could|now)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
+    '([^0-9a-zÀ-ÿ]|^|\s+)(some|such|nor|only|own|same|so|than|too|very|s|t|can|will|just|also|don|should|would|could|now)([^0-9a-zÀ-ÿ]|\s+|$)':'\\1 \\3',
 }
