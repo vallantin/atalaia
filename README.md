@@ -141,6 +141,6 @@ Use [SemVer](http://semver.org/) for versioning.
 
 This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
 
-# V 0.3.3
+# V 0.3.4
 #  Improvements
-- added new stop words to en.
+- Modified the way as the create_corpus method works.

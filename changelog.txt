@@ -1,3 +1,7 @@
+# V 0.3.4
+#  Improvements
+- Modified the way as the create_corpus method works.
+
 # V 0.3.3
 #  Improvements
 - added new stop words to en.

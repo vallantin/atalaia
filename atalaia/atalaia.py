@@ -763,10 +763,7 @@ class Atalaia:
         text : list
             The list of strings that will be used to return the corpus
         """
-        corpus = ' '
-        for text in text_list:
-            corpus = corpus + ' ' + str(text)
-        return corpus
+        return ' '.join(text_list)
 
     def vocab_size(self, corpus:str):
         """Returns the number of unique tokens found on the corpus
