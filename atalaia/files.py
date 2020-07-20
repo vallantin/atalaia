@@ -39,3 +39,4 @@ def get_corpus(corpus_path:str, ispandas:False, text_column='text'):
         corpus = open_file(corpus_path)
             
         return [corpus]
+

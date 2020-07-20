@@ -9,6 +9,10 @@ contractions_pt_br = {
     r'\bÀ[\b]?':'A a',
     # ao...
     r'\b(a|A)o(s)?\b':'\\1 o\\2',
+    # não
+    r'\b(n|N)\b':'\\1ão',
+    # que
+    r'\b(q|Q)\b':'\\1ue',
     # pra
     r'\b(p|P)ra\b':'\\1ara',
     r'\b(p|P)ras\b':'\\1ara as',

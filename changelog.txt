@@ -1,3 +1,7 @@
+# V 0.4.0
+#  Improvements
+- New class: Explore. For data exploration
+
 # V 0.3.4
 #  Improvements
 - Modified the way as the create_corpus method works.

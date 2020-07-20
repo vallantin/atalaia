@@ -141,7 +141,7 @@ Use [SemVer](http://semver.org/) for versioning.
 
 This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
 
-# V 0.3.4
+# V 0.4.0
 #  Improvements
-- Modified the way as the create_corpus method works.
-- Check if is list in hapaxes
+- New class: Explore. For data exploration
+- New stopwords added to PT-BR

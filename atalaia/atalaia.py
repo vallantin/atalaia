@@ -357,7 +357,7 @@ class Atalaia:
             The string that will replace the punctuation and the special chars found
         """
         if sign is '':
-            text = re.sub(r'[^\w\s]', ' ' + placeholder + ' ', text)    
+            text = re.sub(r'[^\w\s&]', ' ' + placeholder + ' ', text)    
         else:
             text = text.replace(sign, ' ' + placeholder + ' ')
         
@@ -465,63 +465,13 @@ class Atalaia:
         # check in stopwords
         for pattern, replacement in self.stopwords.items():
             text = re.sub(pattern, replacement, text, flags=re.I | re.M)
+            
             text = self.remove_excessive_spaces(text)
+            
             # run second time to match chars that could not me matched at first
             text = re.sub(pattern, replacement, text, flags=re.I | re.M)
  
         return text
-
-        '''
-        """ Removes stopwords
-
-        >>> remove_stopwords('I love to go shopping with my mother and friends')
-        'love go shopping mother friends'
-
-        Parameters
-        ----------
-        text : str
-            The string that will be transformed
-        custom_list : list
-            A list with the custom stopwords list
-        extend_set : boolean
-            Use this option to extend the stopwords of a given language with your custom list 
-        """
-        # define the stopwords set to use
-        if self.language == 'pt-br':
-            stop_words = stopwords.portuguese
-        elif self.language == 'en':
-            stop_words = stopwords.english
-        elif self.language == 'fr':
-            stop_words = stopwords.french
-        elif self.language == 'custom':
-            stop_words = custom_list
-        else:
-            print('This set is not available. No stopword will be removed!')
-            stop_words = []
-
-        # extend with a list of custom words
-        if extend_set == True:
-            stop_words = stop_words + custom_list
-
-        # add spaces to the beginning and to the end of the sentence, 
-        # so stopwords on these locations can be spotted
-        text = ' ' + text + ' '
-
-        for word in stop_words:
-            text = re.sub(r'\s' + word + r'\s', ' ', text, flags=re.I)
-            if self.language == 'fr':
-                text = re.sub(re.escape('j\''), ' ', text, flags=re.I)
-                text = re.sub(re.escape('d\''), ' ', text, flags=re.I)
-                text = re.sub(re.escape('l\''), ' ', text, flags=re.I)
-                text = re.sub(re.escape('m\''), ' ', text, flags=re.I)
-                text = re.sub(re.escape('s\''), ' ', text, flags=re.I)
-                text = re.sub(re.escape('t\''), ' ', text, flags=re.I)
-            
-        # strip adititonal the spaces
-        text = text.strip()
-        text = self.remove_excessive_spaces(text)
-        return text
-        '''
 
     def reduce_words_with_repeated_chars(self, text:str):
         """Reduces words with chars repeated more than 3 times to a single char. 
@@ -672,11 +622,11 @@ class Atalaia:
         # expand contractions
         if expand_contractions == True:
             text = self.expand_contractions(text)
+        # lowers text and removes trailing spaces
+        text = self.lower_remove_white(text)
         # remove stopwords
         if remove_stopwords:
             text = self.remove_stopwords(text)
-        # lowers text and removes trailing spaces
-        text = self.lower_remove_white(text)
         # emoji to text
         text = emoji.demojize(text)
         # replace urls
